@@ -1,12 +1,13 @@
 package classes
 
-type Combattant struct{
+import "world-of-milousques/inventaire"
+
+type Combattant struct {
 	Nom        string
 	VieMax     int
 	Vie        int
 	Armure     int
 	Mort       bool
-	Inventaire *Inventaire
-	Equipement map[string]Objet
+	Inventaire *inventaire.Inventaire
+	Equipement map[string]inventaire.Objet
 }
-

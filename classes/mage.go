@@ -1,12 +1,17 @@
 package classes
 
-import "fmt"
+import (
+	"fmt"
+	"world-of-milousques/inventaire"
+)
 
 type SortMage struct {
-	Nom         string
-	Coût        int
-	Dégâts      int
-	Description string
+	Nom              string
+	Cout             int
+	Degats           int
+	Description      string
+	NiveauNecessaire int
+	Effet            Effet
 }
 
 type Mage struct {
@@ -18,44 +23,64 @@ type Mage struct {
 }
 
 func (m *Mage) Attaquer() int {
-
 	return m.Intel
 }
 
-func (m *Mage) Défendre(dégats int) {
-
-	dégatsRéels := dégats - m.Armure
-
-	if dégatsRéels < 0 {
-		dégatsRéels = 0
+func (m *Mage) Defendre(degats int) {
+	degatsReels := degats - m.Armure
+	if degatsReels < 0 {
+		degatsReels = 0
 	}
-
-	m.Vie -= dégatsRéels
+	m.Vie -= degatsReels
 }
 
 func (m *Mage) EstMort() bool {
-
 	return m.Vie <= 0
 }
 
 func (m *Mage) GetNom() string {
-
 	return m.Nom
 }
 
 func (m *Mage) GetVie() int {
-
 	return m.Vie
 }
 
-func (m *Mage) LancerSort(sort SortMage) (int, error) {
-
-	if m.Mana < sort.Coût {
-		return 0, fmt.Errorf("mana insuffisant (%d/%d)", m.Mana, sort.Coût)
+func sortsMage() []SortMage {
+	return []SortMage{
+		{
+			Nom:              "Boule de feu",
+			Cout:             20,
+			Degats:           35,
+			Description:      "Un sort de feu basique",
+			NiveauNecessaire: 1,
+			Effet:            DegatsDirect,
+		},
+		{
+			Nom:              "Metamorphose",
+			Cout:             20,
+			Degats:           0,
+			Description:      "Transforme l'ennemi en mouton pour 1 tour",
+			NiveauNecessaire: 1,
+			Effet:            Stun,
+		},
+		{
+			Nom:              "Soin",
+			Cout:             30,
+			Degats:           50,
+			Description:      "Te soigne de 50pv",
+			NiveauNecessaire: 3,
+			Effet:            Soin,
+		},
 	}
+}
 
-	m.Mana -= sort.Coût
-	return sort.Dégâts, nil
+func (m *Mage) LancerSort(sort SortMage) (int, error) {
+	if m.Mana < sort.Cout {
+		return 0, fmt.Errorf("mana insuffisant (%d/%d)", m.Mana, sort.Cout)
+	}
+	m.Mana -= sort.Cout
+	return sort.Degats, nil
 }
 
 func NewMage(nom string) *Mage {
@@ -65,12 +90,12 @@ func NewMage(nom string) *Mage {
 			VieMax:     100,
 			Vie:        100,
 			Armure:     10,
-			Inventaire: NewInventaire(20),
-			Equipement: make(map[string]Objet),
+			Inventaire: inventaire.NewInventaire(20),
+			Equipement: make(map[string]inventaire.Objet),
 		},
 		Intel:   15,
 		Mana:    50,
 		ManaMax: 50,
-		Sorts:   []SortMage{},
+		Sorts:   sortsMage(),
 	}
 }
