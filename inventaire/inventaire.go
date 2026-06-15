@@ -2,18 +2,9 @@ package inventaire
 
 import "fmt"
 
-type Objet struct {
-	Nom         string
-	Poids       int
-	Valeur      int
-	Equipable   bool
-	Consommable bool
-	Stats       []int
-}
-
 type Inventaire struct {
-	objets   []Objet
-	Capacite int
+	objets    []Objet
+	Capacite  int
 }
 
 func NewInventaire(capacite int) *Inventaire {
@@ -23,7 +14,7 @@ func NewInventaire(capacite int) *Inventaire {
 	}
 }
 
-func (inv *Inventaire) Add(objet Objet) error {
+func (inv *Inventaire) Ajouter(objet Objet) error {
 	if len(inv.objets) >= inv.Capacite {
 		return fmt.Errorf("inventaire plein (%d/%d)", len(inv.objets), inv.Capacite)
 	}
@@ -31,7 +22,7 @@ func (inv *Inventaire) Add(objet Objet) error {
 	return nil
 }
 
-func (inv *Inventaire) Remove(nom string) error {
+func (inv *Inventaire) Retirer(nom string) error {
 	for i := 0; i < len(inv.objets); i++ {
 		if inv.objets[i].Nom == nom {
 			for j := i; j < len(inv.objets)-1; j++ {

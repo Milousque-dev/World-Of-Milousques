@@ -6,20 +6,20 @@ import (
 )
 
 type TechniqueVoleur struct {
-	Nom              string
-	Cout             int
-	Degats           int
-	Description      string
-	NiveauNecessaire int
-	Effet            Effet
+	Nom               string
+	Cout              int
+	Degats            int
+	Description       string
+	NiveauNecessaire  int
+	Effet              Effet
 }
 
 type Voleur struct {
 	Combattant
-	Agilite    int
-	Energie    int
-	EnergieMax int
-	Techniques []TechniqueVoleur
+	Agilite     int
+	Energie     int
+	EnergieMax  int
+	Techniques  []TechniqueVoleur
 }
 
 func (v *Voleur) Attaquer() int {
@@ -49,28 +49,28 @@ func (v *Voleur) GetVie() int {
 func techniquesVoleur() []TechniqueVoleur {
 	return []TechniqueVoleur{
 		{
-			Nom:              "Attaque sournoise",
-			Cout:             20,
-			Degats:           35,
-			Description:      "Une attaque dans le dos de l'ennemi",
-			NiveauNecessaire: 1,
-			Effet:            DegatsDirect,
+			Nom:               "Attaque sournoise",
+			Cout:              20,
+			Degats:            35,
+			Description:       "Une attaque dans le dos de l'ennemi",
+			NiveauNecessaire:  1,
+			Effet:             DegatsDirect,
 		},
 		{
-			Nom:              "Empoisonnement",
-			Cout:             15,
-			Degats:           10,
-			Description:      "Empoisonne l'ennemi pour 3 tours",
-			NiveauNecessaire: 1,
-			Effet:            Poison,
+			Nom:               "Empoisonnement",
+			Cout:              15,
+			Degats:            10,
+			Description:       "Empoisonne l'ennemi pour 3 tours",
+			NiveauNecessaire:  1,
+			Effet:             Poison,
 		},
 		{
-			Nom:              "Technique pernicieuse",
-			Cout:             40,
-			Degats:           25,
-			Description:      "Etourdit l'ennemi pour 1 tour",
-			NiveauNecessaire: 3,
-			Effet:            Stun,
+			Nom:               "Technique pernicieuse",
+			Cout:              40,
+			Degats:            25,
+			Description:       "Etourdit l'ennemi pour 1 tour",
+			NiveauNecessaire:  3,
+			Effet:             Stun,
 		},
 	}
 }
@@ -86,16 +86,16 @@ func (v *Voleur) UtiliserTechnique(tech TechniqueVoleur) (int, error) {
 func NewVoleur(nom string) *Voleur {
 	return &Voleur{
 		Combattant: Combattant{
-			Nom:        nom,
-			VieMax:     150,
-			Vie:        150,
-			Armure:     10,
-			Inventaire: inventaire.NewInventaire(20),
-			Equipement: make(map[string]inventaire.Objet),
+			Nom:         nom,
+			VieMax:      150,
+			Vie:         150,
+			Armure:      10,
+			Inventaire:  inventaire.NewInventaire(20),
+			Equipement:  inventaire.NewEquipement(),
 		},
-		Agilite:    15,
-		Energie:    0,
-		EnergieMax: 100,
-		Techniques: techniquesVoleur(),
+		Agilite:     15,
+		Energie:     0,
+		EnergieMax:  100,
+		Techniques:  techniquesVoleur(),
 	}
 }

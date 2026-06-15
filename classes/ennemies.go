@@ -1,11 +1,11 @@
 package classes
 
 type Ennemi struct {
-	Nom    string
-	Vie    int
-	VieMax int
-	Armure int
-	Atq    int
+	Nom     string
+	Vie     int
+	VieMax  int
+	Armure  int
+	Atq     int
 }
 
 func (e *Ennemi) Attaquer() int {
@@ -34,10 +34,10 @@ func (e *Ennemi) GetVie() int {
 
 func NewEnnemi(nom string) *Ennemi {
 	return &Ennemi{
-		Nom:    nom,
-		VieMax: 150,
-		Vie:    150,
-		Armure: 10,
-		Atq:    10,
+		Nom:     nom,
+		VieMax:  150,
+		Vie:     150,
+		Armure:  10,
+		Atq:     10,
 	}
 }
