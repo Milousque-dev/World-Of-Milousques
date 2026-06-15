@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(Remove-Item \"c:\\\\Users\\\\jeuxp\\\\Documents\\\\World-Of-Milousques\\\\classes\\\\inventaire.go\")"
-    ]
-  }
-}
